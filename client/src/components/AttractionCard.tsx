@@ -1,5 +1,5 @@
 import { type Attraction } from "@shared/schema";
-import { Ruler, Sparkles, Gamepad2 } from "lucide-react";
+import { Ruler, Sparkles, Gamepad2, CreditCard, Star } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { motion } from "framer-motion";
 
@@ -9,58 +9,93 @@ interface AttractionCardProps {
 }
 
 export function AttractionCard({ attraction, index }: AttractionCardProps) {
+  const isBonus = attraction.category === 'Bonus';
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
-      className="group relative bg-card rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border border-border/50"
+      className="group relative bg-card rounded-[2.5rem] overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 border-4 border-border/50 hover:border-primary/50"
     >
-      <div className="relative h-64 overflow-hidden">
+      <div className="relative h-72 overflow-hidden">
         <img
           src={attraction.image}
           alt={attraction.name}
           className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-80" />
-        <div className="absolute bottom-4 left-4 right-4">
-          <div className="flex gap-2 mb-2">
-            <Badge variant="secondary" className="font-bold text-xs uppercase tracking-wider">
-              {attraction.type}
-            </Badge>
-            <Badge variant="outline" className="text-white border-white/50 bg-black/20 backdrop-blur-sm">
-              {attraction.category}
-            </Badge>
+        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-80" />
+        
+        <div className="absolute top-4 right-4">
+          <Badge 
+            className={`text-sm font-bold px-4 py-2 rounded-full shadow-lg ${
+              isBonus 
+                ? "bg-secondary text-secondary-foreground" 
+                : "bg-primary text-primary-foreground"
+            }`}
+          >
+            <div className="flex items-center gap-2">
+              {isBonus ? <Star className="w-4 h-4 fill-current" /> : <CreditCard className="w-4 h-4" />}
+              {attraction.category} Ride
+            </div>
+          </Badge>
+        </div>
+
+        <div className="absolute bottom-6 left-6 right-6">
+          <h3 className="text-3xl font-display font-bold text-white mb-2">{attraction.name}</h3>
+          <div className="flex items-center gap-2 text-white/90 font-medium">
+            <Ruler className="w-5 h-5 text-yellow-400" />
+            <span>Height: {attraction.heightLimit || "All ages"}</span>
           </div>
-          <h3 className="text-2xl font-display font-bold text-white text-shadow">{attraction.name}</h3>
         </div>
       </div>
       
-      <div className="p-6">
-        <p className="text-muted-foreground mb-6 line-clamp-3">{attraction.description}</p>
+      <div className="p-8">
+        <div className="mb-6">
+          <h4 className="text-sm font-bold text-primary uppercase tracking-widest mb-2 flex items-center gap-2">
+            <Info className="w-4 h-4" />
+            Ride Rules
+          </h4>
+          <p className="text-muted-foreground font-medium leading-relaxed italic">
+            "{attraction.rules || "Follow all safety guidelines and staff instructions."}"
+          </p>
+        </div>
         
-        <div className="flex items-center gap-4 text-sm font-medium text-foreground/80">
-          {attraction.minHeight && (
-            <div className="flex items-center gap-2 bg-muted/50 px-3 py-1.5 rounded-lg">
-              <Ruler className="w-4 h-4 text-primary" />
-              <span>Min: {attraction.minHeight}cm</span>
-            </div>
-          )}
+        <div className="flex flex-wrap gap-3">
           {attraction.type === 'game' && (
-            <div className="flex items-center gap-2 bg-muted/50 px-3 py-1.5 rounded-lg">
-              <Gamepad2 className="w-4 h-4 text-accent" />
-              <span>Skill Game</span>
-            </div>
+            <Badge variant="outline" className="flex items-center gap-2 px-3 py-1.5 border-accent text-accent">
+              <Gamepad2 className="w-4 h-4" />
+              Skill Game
+            </Badge>
           )}
-          {attraction.category === 'thrill' && (
-            <div className="flex items-center gap-2 bg-muted/50 px-3 py-1.5 rounded-lg">
-              <Sparkles className="w-4 h-4 text-secondary" />
-              <span>High Thrill</span>
-            </div>
-          )}
+          <Badge variant="outline" className="flex items-center gap-2 px-3 py-1.5 border-secondary text-secondary">
+            <Sparkles className="w-4 h-4" />
+            {isBonus ? 'Bonus Feature' : 'Balance Ride'}
+          </Badge>
         </div>
       </div>
     </motion.div>
+  );
+}
+
+function Info(props: any) {
+  return (
+    <svg
+      {...props}
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <circle cx="12" cy="12" r="10" />
+      <path d="M12 16v-4" />
+      <path d="M12 8h.01" />
+    </svg>
   );
 }

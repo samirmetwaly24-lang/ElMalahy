@@ -26,7 +26,6 @@ export async function registerRoutes(
 
   app.post(api.bookings.create.path, async (req, res) => {
     try {
-      // Coerce the date and guests field to the correct type for the schema
       const schemaWithCoercion = api.bookings.create.input.extend({
         date: z.coerce.date(),
         guests: z.coerce.number(),
@@ -62,93 +61,80 @@ export async function registerRoutes(
     }
   });
 
-  // Optional: Seed the database on startup if empty
   await seedDatabase();
 
   return httpServer;
 }
 
 async function seedDatabase() {
+  const { db } = await import("./db");
+  const { attractions, packages, events } = await import("@shared/schema");
+  
   const existingAttractions = await storage.getAttractions();
   if (existingAttractions.length === 0) {
-    const { db } = await import("./db");
-    const { attractions, packages, events } = await import("@shared/schema");
+    const balanceRides = [
+      { name: "Dragon Force", height: "130–190 cm", category: "Balance" },
+      { name: "Monster Ride", height: "140–190 cm", category: "Balance" },
+      { name: "Air Trance", height: "130–190 cm", category: "Balance" },
+      { name: "Horror House", height: "130 cm+", category: "Balance" },
+      { name: "Trampoline", height: "100 cm+", category: "Balance" },
+      { name: "Carnival Games", height: "All ages", category: "Balance" },
+      { name: "Scream Drop", height: "120–190 cm", category: "Balance" },
+      { name: "Ice Rink", height: "6 years+", category: "Balance" },
+      { name: "Rock N Race", height: "120–190 cm", category: "Balance" },
+      { name: "Rodeo Games", height: "120 cm+", category: "Balance" },
+      { name: "Redemption Game", height: "All ages", category: "Balance" },
+      { name: "War Zone", height: "All ages", category: "Balance" },
+      { name: "Speed Space", height: "80–120 cm", category: "Balance" },
+      { name: "VR", height: "All ages", category: "Balance" },
+      { name: "Bumper Cars", height: "90–115 cm (with adult), 115 cm+ alone", category: "Balance" },
+    ];
 
-    // Insert sample attractions
-    await db.insert(attractions).values([
-      {
-        name: "Dragon Force",
-        description: "Experience the thrilling twists and turns of the mighty Dragon Force roller coaster.",
-        type: "ride",
-        category: "thrill",
-        minHeight: 140,
-        image: "https://images.unsplash.com/photo-1513889961551-628c1e5e2ee9"
-      },
-      {
-        name: "Monster Ride",
-        description: "A wild spinning adventure that will leave you dizzy with excitement.",
-        type: "ride",
-        category: "thrill",
-        minHeight: 130,
-        image: "https://images.unsplash.com/photo-1533514088921-2fc5e1104e6c"
-      },
-      {
-        name: "Air Trance",
-        description: "Soar high above the park and take in the breathtaking views.",
-        type: "ride",
-        category: "family",
-        minHeight: 120,
-        image: "https://images.unsplash.com/photo-1505531238466-9ab5d43e5c9b"
-      },
-      {
-        name: "Horror House",
-        description: "Brave the spooky corridors and try to make it out without screaming.",
-        type: "ride",
-        category: "thrill",
-        minHeight: 130,
-        image: "https://images.unsplash.com/photo-1518296316260-26462740449a"
-      },
-      {
-        name: "Carnival Games",
-        description: "Test your skills at our classic carnival games and win big prizes!",
-        type: "game",
-        category: "family",
-        minHeight: null,
-        image: "https://images.unsplash.com/photo-1511886929837-354d827aae26"
-      }
-    ]);
+    const bonusRides = [
+      { name: "Fly Funk", height: "90–190 cm", category: "Bonus" },
+      { name: "Carousel", height: "under 105 cm (with adult), 105 cm+ alone", category: "Bonus" },
+      { name: "Rocking Ship", height: "110–190 cm", category: "Bonus" },
+      { name: "Disco Slide", height: "130–190 cm", category: "Bonus" },
+      { name: "Soft Play", height: "90 cm+", category: "Bonus" },
+      { name: "Jump Around", height: "80–120 cm", category: "Bonus" },
+      { name: "Video Games", height: "All ages", category: "Bonus" },
+    ];
 
-    // Insert sample packages
+    const allRideData = [...balanceRides, ...bonusRides].map(ride => ({
+      name: ride.name,
+      description: `Experience the thrill of ${ride.name}! Fun and excitement guaranteed.`,
+      type: "ride",
+      category: ride.category,
+      heightLimit: ride.height,
+      rules: "Follow all safety guidelines and staff instructions.",
+      image: `https://images.unsplash.com/photo-1513889961551-628c1e5e2ee9?q=80&w=800&auto=format&fit=crop`
+    }));
+
+    await db.insert(attractions).values(allRideData);
+
     await db.insert(packages).values([
       {
         name: "Starter Fun Package",
-        description: "Perfect for a quick visit. Includes access to all Balance rides and bonus credit for special attractions.",
-        price: 52500, // $525.00 represented in cents, or just EGP 525
-        features: ["Access to all Balance rides", "Bonus credit for special attractions", "Valid for 30 days", "Single person entry"],
+        description: "Perfect for a quick visit. Includes access to all Balance rides and bonus credit.",
+        price: 52500,
+        features: ["Access to all Balance rides", "Bonus credit", "Valid for 30 days"],
         popular: false
       },
       {
         name: "Ultimate Thrill Package",
-        description: "For the true thrill-seekers. Get maximum ride access, extra bonus credit, and priority access.",
+        description: "For true thrill-seekers. Maximum access and extra bonus credit.",
         price: 75000,
-        features: ["Maximum ride access", "Extra bonus credit", "Priority access benefits", "Best value for money"],
+        features: ["Maximum ride access", "Extra bonus credit", "Priority access"],
         popular: true
       }
     ]);
 
-    // Insert sample events
     await db.insert(events).values([
       {
         title: "Summer Splash Festival",
-        description: "Join us for our annual summer celebration with water rides, live music, and amazing food.",
+        description: "Annual summer celebration with water rides and music.",
         date: new Date(new Date().setMonth(new Date().getMonth() + 1)),
         image: "https://images.unsplash.com/photo-1496843916299-5904cb0c8e17"
-      },
-      {
-        title: "Spooky Nights",
-        description: "Our park transforms into a haunted wonderland. Special nighttime rides and scare zones.",
-        date: new Date(new Date().setMonth(new Date().getMonth() + 2)),
-        image: "https://images.unsplash.com/photo-1509347528160-9a9e33742cdb"
       }
     ]);
   }

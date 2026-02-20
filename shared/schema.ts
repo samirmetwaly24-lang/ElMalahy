@@ -8,8 +8,9 @@ export const attractions = pgTable("attractions", {
   name: text("name").notNull(),
   description: text("description").notNull(),
   type: text("type").notNull(), // 'ride', 'game'
-  category: text("category").notNull(), // 'thrill', 'family', 'kids'
-  minHeight: integer("min_height"), // in cm
+  category: text("category").notNull(), // 'Balance', 'Bonus'
+  heightLimit: text("height_limit"), // String to support ranges and rules
+  rules: text("rules"),
   image: text("image").notNull(),
 });
 
