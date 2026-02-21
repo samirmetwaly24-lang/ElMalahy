@@ -17,14 +17,16 @@ export default function Home() {
       {/* Hero Section */}
       <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">
-          {/* Unsplash image of roller coaster with vibrant sky */}
-          {/* <img src="https://images.unsplash.com/photo-1513889961551-628c1e5e2ee9?q=80&w=2070&auto=format&fit=crop" alt="Theme park background" className="w-full h-full object-cover" /> */}
-          <div className="absolute inset-0 bg-gradient-to-b from-primary/30 to-background/90 z-10" />
-          <img 
-            src="https://images.unsplash.com/photo-1505928680193-4a18016dd996?q=80&w=2070&auto=format&fit=crop"
-            alt="Amusement Park Hero" 
+          <video 
+            autoPlay 
+            muted 
+            loop 
+            playsInline
             className="w-full h-full object-cover"
-          />
+          >
+            <source src="/hero-video.mp4" type="video/mp4" />
+          </video>
+          <div className="absolute inset-0 bg-gradient-to-b from-primary/40 to-background/90 z-10" />
         </div>
 
         <div className="relative z-20 container mx-auto px-4 text-center">
@@ -34,7 +36,7 @@ export default function Home() {
             transition={{ duration: 0.8 }}
           >
             <h1 className="font-display text-6xl md:text-8xl font-bold text-white mb-6 drop-shadow-lg tracking-tight">
-              Unleash the <span className="text-secondary">Fun!</span>
+              Let The Fun <span className="text-secondary">Begun</span>
             </h1>
             <p className="text-xl md:text-2xl text-white/90 max-w-2xl mx-auto mb-10 font-medium leading-relaxed drop-shadow-md">
               Experience heart-pounding rides, magical moments, and unforgettable adventures for the whole family.
@@ -105,7 +107,7 @@ export default function Home() {
                 Upcoming Events
               </h2>
               <p className="text-primary-foreground/90 text-xl mb-8 leading-relaxed">
-                From summer concerts to spooky Halloween nights, there's always something happening at FunLand. Don't miss out on the magic!
+                From summer concerts to spooky Halloween nights, there's always something happening at ElMalahy. Don't miss out on the magic!
               </p>
               <div className="flex gap-4">
                 <Link href="/events">
@@ -154,6 +156,35 @@ export default function Home() {
               <p className="text-muted-foreground">Unlimited fun all year round for one low price.</p>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-24 bg-gradient-to-r from-primary to-accent text-white relative overflow-hidden">
+        <div className="absolute inset-0 opacity-20">
+          <div className="absolute top-0 left-0 w-64 h-64 bg-white rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
+          <div className="absolute bottom-0 right-0 w-96 h-96 bg-secondary rounded-full blur-3xl translate-x-1/2 translate-y-1/2" />
+        </div>
+        <div className="container mx-auto px-4 relative z-10 text-center">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            className="max-w-4xl mx-auto"
+          >
+            <h2 className="font-display text-5xl md:text-7xl font-bold mb-8 leading-tight">
+              Ready for the Adventure of a Lifetime?
+            </h2>
+            <p className="text-2xl md:text-3xl mb-12 opacity-90 font-medium leading-relaxed">
+              Don't wait for the weekend—magical memories are being made every single day at ElMalahy!
+            </p>
+            <Link href="/booking">
+              <Button size="lg" className="h-20 px-12 rounded-full bg-secondary text-secondary-foreground text-2xl font-black shadow-2xl hover:shadow-secondary/50 hover:scale-110 transition-all duration-500 group">
+                BOOK YOUR ADVENTURE NOW
+                <ArrowRight className="ml-4 w-8 h-8 group-hover:translate-x-2 transition-transform" />
+              </Button>
+            </Link>
+          </motion.div>
         </div>
       </section>
 

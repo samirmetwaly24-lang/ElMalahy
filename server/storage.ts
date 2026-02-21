@@ -10,6 +10,7 @@ export interface IStorage {
   getAttractions(): Promise<Attraction[]>;
   getPackages(): Promise<Package[]>;
   getEvents(): Promise<Event[]>;
+  getBooking(id: number): Promise<Booking | undefined>;
   createBooking(booking: InsertBooking): Promise<Booking>;
   createContactMessage(message: InsertContactMessage): Promise<ContactMessage>;
 }
@@ -25,6 +26,11 @@ export class DatabaseStorage implements IStorage {
 
   async getEvents(): Promise<Event[]> {
     return await db.select().from(events);
+  }
+
+  async getBooking(id: number): Promise<Booking | undefined> {
+    const [booking] = await db.select().from(bookings).where(eq(bookings.id, id));
+    return booking;
   }
 
   async createBooking(insertBooking: InsertBooking): Promise<Booking> {

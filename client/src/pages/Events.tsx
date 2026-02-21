@@ -23,7 +23,7 @@ export default function Events() {
             Special Events
           </motion.h1>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Mark your calendars! There's always something magical happening at FunLand.
+            Mark your calendars! There's always something magical happening at ElMalahy.
           </p>
         </div>
 

@@ -10,6 +10,9 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 export default function Packages() {
   const { data: packages, isLoading } = usePackages();
 
+  // Fix duplicate bundles using unique names
+  const uniquePackages = packages ? Array.from(new Map(packages.map(pkg => [pkg.name, pkg])).values()) : [];
+
   return (
     <div className="min-h-screen bg-background">
       <Navigation />
@@ -35,7 +38,7 @@ export default function Packages() {
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            {packages?.map((pkg, index) => (
+            {uniquePackages.map((pkg, index) => (
               <motion.div
                 key={pkg.id}
                 initial={{ opacity: 0, y: 30 }}

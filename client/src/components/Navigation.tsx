@@ -1,13 +1,24 @@
 import { Link, useLocation } from "wouter";
-import { Ticket, Calendar, Mail, MapPin, Gamepad2 } from "lucide-react";
+import { Calendar, Mail, MapPin, Gamepad2, Ticket, Flame } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Menu } from "lucide-react";
+import elMalahyLogo from "@assets/image_1771636686477.png";
+import { motion } from "framer-motion";
 
 export function Navigation() {
   const [location] = useLocation();
   const [isOpen, setIsOpen] = useState(false);
+  const [energyLevel, setEnergyLevel] = useState("Very High");
+
+  // Mock dynamic logic for energy level
+  useEffect(() => {
+    const levels = ["Low", "Moderate", "Very High"];
+    const randomLevel = levels[Math.floor(Math.random() * levels.length)];
+    // In a real app, you'd fetch booking counts here
+    setEnergyLevel("Very High"); 
+  }, []);
 
   const links = [
     { href: "/", label: "Home", icon: null },
@@ -18,15 +29,27 @@ export function Navigation() {
   ];
 
   return (
-    <nav className="sticky top-0 z-50 w-full bg-background/80 backdrop-blur-lg border-b border-primary/10">
+    <div className="w-full">
+      {/* Energy Bar */}
+      <div className="bg-secondary text-secondary-foreground py-2 overflow-hidden relative shadow-inner">
+        <motion.div 
+          animate={{ opacity: [0.7, 1, 0.7] }}
+          transition={{ duration: 2, repeat: Infinity }}
+          className="container mx-auto px-4 flex items-center justify-center gap-2 font-black text-sm uppercase tracking-widest"
+        >
+          <Flame className="w-4 h-4 fill-current animate-bounce" />
+          Today's Park Energy: <span className="underline decoration-wavy underline-offset-4">{energyLevel}!</span>
+        </motion.div>
+      </div>
+      
+      <nav className="sticky top-0 z-50 w-full bg-background/80 backdrop-blur-lg border-b border-primary/10">
       <div className="container mx-auto px-4 h-20 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2 group">
-          <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center text-white shadow-lg group-hover:scale-110 transition-transform duration-300">
-            <Ticket className="w-6 h-6" />
-          </div>
-          <span className="font-display text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent">
-            FunLand
-          </span>
+          <img 
+            src={elMalahyLogo} 
+            alt="ElMalahy - The Land of Amusement" 
+            className="h-12 w-auto group-hover:scale-105 transition-transform duration-300" 
+          />
         </Link>
 
         {/* Desktop Nav */}
@@ -86,5 +109,6 @@ export function Navigation() {
         </div>
       </div>
     </nav>
+    </div>
   );
 }

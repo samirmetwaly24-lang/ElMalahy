@@ -2,7 +2,7 @@ import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { insertBookingSchema, type InsertBooking } from "@shared/schema";
+import { insertBookingSchema, type InsertBooking, type Booking } from "@shared/schema";
 import { useCreateBooking } from "@/hooks/use-bookings";
 import { usePackages } from "@/hooks/use-packages";
 import { Button } from "@/components/ui/button";
@@ -13,9 +13,11 @@ import { Calendar } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { cn } from "@/lib/utils";
 import { format } from "date-fns";
-import { CalendarIcon, Loader2, Ticket } from "lucide-react";
-import { motion } from "framer-motion";
+import { CalendarIcon, Loader2, Ticket, CheckCircle2, Download, QrCode } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 import { z } from "zod";
+import { useState } from "react";
+import { QRCodeSVG } from "qrcode.react";
 
 // Enhance schema to handle coercing string inputs from form to numbers/dates
 const formSchema = insertBookingSchema.extend({
@@ -27,6 +29,7 @@ const formSchema = insertBookingSchema.extend({
 export default function Booking() {
   const { data: packages, isLoading: isLoadingPackages } = usePackages();
   const createBooking = useCreateBooking();
+  const [successBooking, setSuccessBooking] = useState<Booking | null>(null);
   
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -39,7 +42,8 @@ export default function Booking() {
 
   function onSubmit(data: z.infer<typeof formSchema>) {
     createBooking.mutate(data, {
-      onSuccess: () => {
+      onSuccess: (booking) => {
+        setSuccessBooking(booking);
         form.reset();
       }
     });
@@ -49,6 +53,76 @@ export default function Booking() {
   const selectedPackage = packages?.find(p => p.id === selectedPackageId);
   const guestCount = form.watch("guests") || 1;
   const total = selectedPackage ? (selectedPackage.price * guestCount) : 0;
+
+  if (successBooking) {
+    return (
+      <div className="min-h-screen bg-background">
+        <Navigation />
+        <div className="container mx-auto px-4 py-16">
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="max-w-2xl mx-auto bg-card p-8 md:p-12 rounded-[3rem] shadow-2xl border-4 border-primary/20 text-center"
+          >
+            <div className="w-20 h-20 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-6">
+              <CheckCircle2 className="w-12 h-12" />
+            </div>
+            <h1 className="text-4xl font-display font-bold text-primary mb-2">Booking Confirmed!</h1>
+            <p className="text-muted-foreground mb-10 text-lg">Your adventure at ElMalahy begins soon. Here is your digital E-Ticket.</p>
+
+            <div className="bg-white p-8 rounded-[2rem] shadow-inner mb-8 border-2 border-dashed border-primary/30 relative">
+              <div className="absolute -left-4 top-1/2 -translate-y-1/2 w-8 h-8 bg-card rounded-full" />
+              <div className="absolute -right-4 top-1/2 -translate-y-1/2 w-8 h-8 bg-card rounded-full" />
+              
+              <div className="flex flex-col items-center gap-6">
+                <div className="p-4 bg-white border-4 border-primary/10 rounded-2xl shadow-sm">
+                  <QRCodeSVG 
+                    value={`https://elmalahy.com/verify/${successBooking.id}`} 
+                    size={200}
+                    level="H"
+                    includeMargin={true}
+                  />
+                </div>
+                
+                <div className="w-full space-y-4 text-left">
+                  <div className="flex justify-between border-b border-primary/5 pb-2">
+                    <span className="text-muted-foreground uppercase text-xs font-bold tracking-widest">Ticket Holder</span>
+                    <span className="font-bold">{successBooking.name}</span>
+                  </div>
+                  <div className="flex justify-between border-b border-primary/5 pb-2">
+                    <span className="text-muted-foreground uppercase text-xs font-bold tracking-widest">Visit Date</span>
+                    <span className="font-bold">{format(new Date(successBooking.date), "PPP")}</span>
+                  </div>
+                  <div className="flex justify-between border-b border-primary/5 pb-2">
+                    <span className="text-muted-foreground uppercase text-xs font-bold tracking-widest">Guests</span>
+                    <span className="font-bold">{successBooking.guests} People</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-muted-foreground uppercase text-xs font-bold tracking-widest">Package</span>
+                    <span className="font-bold text-primary">{packages?.find(p => p.id === successBooking.packageId)?.name}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="flex flex-col sm:flex-row gap-4">
+              <Button size="lg" className="flex-1 rounded-full h-14 font-bold text-lg">
+                <Download className="mr-2 w-5 h-5" /> Download PDF
+              </Button>
+              <Button size="lg" variant="outline" onClick={() => setSuccessBooking(null)} className="flex-1 rounded-full h-14 font-bold text-lg">
+                Book Another
+              </Button>
+            </div>
+            
+            <p className="mt-8 text-sm text-muted-foreground flex items-center justify-center gap-2">
+              <QrCode className="w-4 h-4" /> Present this QR code at the main entrance
+            </p>
+          </motion.div>
+        </div>
+        <Footer />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-background">

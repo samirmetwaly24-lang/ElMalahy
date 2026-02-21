@@ -12,12 +12,16 @@ import Packages from "@/pages/Packages";
 import Events from "@/pages/Events";
 import Contact from "@/pages/Contact";
 import Booking from "@/pages/Booking";
+import RideDetails from "@/pages/RideDetails";
+import VerifyTicket from "@/pages/VerifyTicket";
 
 function Router() {
   return (
     <Switch>
       <Route path="/" component={Home} />
       <Route path="/attractions" component={Attractions} />
+      <Route path="/attractions/:id" component={RideDetails} />
+      <Route path="/verify/:id" component={VerifyTicket} />
       <Route path="/packages" component={Packages} />
       <Route path="/events" component={Events} />
       <Route path="/contact" component={Contact} />

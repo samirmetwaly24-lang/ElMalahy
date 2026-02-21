@@ -1,5 +1,6 @@
 import { Ticket, Facebook, Instagram, Twitter } from "lucide-react";
 import { Link } from "wouter";
+import elMalahyLogo from "@assets/image_1771636686477.png";
 
 export function Footer() {
   return (
@@ -8,10 +9,11 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
           <div className="col-span-1 md:col-span-1">
             <Link href="/" className="flex items-center gap-2 mb-4 group cursor-pointer">
-              <div className="w-10 h-10 rounded-full bg-white text-primary flex items-center justify-center shadow-lg">
-                <Ticket className="w-6 h-6" />
-              </div>
-              <span className="font-display text-2xl font-bold">FunLand</span>
+              <img 
+                src={elMalahyLogo} 
+                alt="ElMalahy - The Land of Amusement" 
+                className="h-14 w-auto brightness-0 invert" 
+              />
             </Link>
             <p className="text-primary-foreground/80 leading-relaxed">
               Creating magical memories for families and thrill-seekers since 1995. Come experience the joy!
@@ -55,7 +57,7 @@ export function Footer() {
         </div>
 
         <div className="border-t border-white/20 pt-8 text-center text-primary-foreground/60 text-sm">
-          <p>© {new Date().getFullYear()} FunLand Amusement Park. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} ElMalahy Amusement Park. All rights reserved.</p>
         </div>
       </div>
     </footer>
