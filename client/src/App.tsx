@@ -14,6 +14,7 @@ import Contact from "@/pages/Contact";
 import Booking from "@/pages/Booking";
 import RideDetails from "@/pages/RideDetails";
 import VerifyTicket from "@/pages/VerifyTicket";
+import TopThrillDetail from "@/pages/TopThrillDetail";
 
 function Router() {
   return (
@@ -22,6 +23,7 @@ function Router() {
       <Route path="/attractions" component={Attractions} />
       <Route path="/attractions/:id" component={RideDetails} />
       <Route path="/verify/:id" component={VerifyTicket} />
+      <Route path="/top-thrill/:id" component={TopThrillDetail} />
       <Route path="/packages" component={Packages} />
       <Route path="/events" component={Events} />
       <Route path="/contact" component={Contact} />

@@ -5,10 +5,43 @@ import { ArrowRight, Ticket, Star, CalendarDays } from "lucide-react";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { useAttractions } from "@/hooks/use-attractions";
+import heroVideo from "@assets/Background_Reel_2_1771725606869.mp4";
+import axisImg from "@assets/WhatsApp_Image_2026-02-22_at_3.32.4_1771725386466.jpeg";
+import tasweraImg from "@assets/WhatsApp_Image_2026-02-22_at_3.32.17__1771725386467.jpeg";
+import koveImg from "@assets/WhatsApp_Image_2026-02-22_at_3.32.17_A_1771725386468.jpeg";
+import filtrdImg from "@assets/WhatsApp_Image_2026-02-22_at_3.32.17_AM_1771725386468.jpeg";
 
 export default function Home() {
-  const { data: attractions } = useAttractions();
-  const featuredAttractions = attractions?.filter(a => a.category === 'thrill').slice(0, 3) || [];
+  const topThrills = [
+    {
+      id: "axis",
+      title: "Axis",
+      category: "Restaurant",
+      description: "A premium amusement park dining experience with a modern twist on classic favorites.",
+      image: axisImg
+    },
+    {
+      id: "taswera",
+      title: "Taswera",
+      category: "Photography Experience",
+      description: "Capture your magical moments in our fun, immersive photo-taking zones throughout the park.",
+      image: tasweraImg
+    },
+    {
+      id: "kove",
+      title: "Kove",
+      category: "Cafe",
+      description: "A modern sanctuary offering refreshing beverages and light bites in a vibrant atmosphere.",
+      image: koveImg
+    },
+    {
+      id: "filtrd",
+      title: "Filtrd",
+      category: "Cafe",
+      description: "Premium coffee-focused experience for those who appreciate the finer notes of a perfect brew.",
+      image: filtrdImg
+    }
+  ];
 
   return (
     <div className="min-h-screen bg-background font-body">
@@ -24,7 +57,7 @@ export default function Home() {
             playsInline
             className="w-full h-full object-cover"
           >
-            <source src="/hero-video.mp4" type="video/mp4" />
+            <source src={heroVideo} type="video/mp4" />
           </video>
           <div className="absolute inset-0 bg-gradient-to-b from-primary/40 to-background/90 z-10" />
         </div>
@@ -57,40 +90,45 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Featured Section */}
+      {/* Top Thrill Section */}
       <section className="py-24 relative overflow-hidden">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="font-display text-4xl md:text-5xl font-bold text-primary mb-4">Top Thrills</h2>
             <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-              Check out our most popular attractions that keep adrenaline junkies coming back for more!
+              Discover our premium dining, coffee, and immersive experiences that make every visit extraordinary.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {featuredAttractions.length > 0 ? (
-              featuredAttractions.map((attraction, i) => (
-                <Link key={attraction.id} href="/attractions">
-                  <motion.div
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: i * 0.2 }}
-                    className="group cursor-pointer relative rounded-3xl overflow-hidden aspect-[3/4] shadow-lg"
-                  >
-                    <img src={attraction.image} alt={attraction.name} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex flex-col justify-end p-8">
-                      <h3 className="text-3xl font-display font-bold text-white mb-2">{attraction.name}</h3>
-                      <p className="text-white/80 line-clamp-2">{attraction.description}</p>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {topThrills.map((item, i) => (
+              <Link key={item.id} href={`/top-thrill/${item.id}`}>
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: i * 0.1 }}
+                  className="group cursor-pointer relative rounded-3xl overflow-hidden aspect-[3/4] shadow-lg flex flex-col h-full bg-card border border-border/50"
+                >
+                  <div className="relative h-2/3 overflow-hidden">
+                    <img src={item.image} alt={item.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+                    <div className="absolute top-4 left-4">
+                      <span className="bg-primary/90 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider backdrop-blur-sm">
+                        {item.category}
+                      </span>
                     </div>
-                  </motion.div>
-                </Link>
-              ))
-            ) : (
-              // Loading/Placeholder state
-              [1, 2, 3].map((_, i) => (
-                <div key={i} className="rounded-3xl bg-muted animate-pulse aspect-[3/4]" />
-              ))
-            )}
+                  </div>
+                  <div className="p-6 flex flex-col flex-1">
+                    <h3 className="text-2xl font-display font-bold text-primary mb-2">{item.title}</h3>
+                    <p className="text-muted-foreground text-sm line-clamp-2 mb-4">{item.description}</p>
+                    <div className="mt-auto">
+                      <Button variant="outline" size="sm" className="rounded-full group-hover:bg-primary group-hover:text-white transition-colors">
+                        Explore More
+                      </Button>
+                    </div>
+                  </div>
+                </motion.div>
+              </Link>
+            ))}
           </div>
         </div>
       </section>
@@ -172,16 +210,16 @@ export default function Home() {
             viewport={{ once: true }}
             className="max-w-4xl mx-auto"
           >
-            <h2 className="font-display text-5xl md:text-7xl font-bold mb-8 leading-tight">
+            <h2 className="font-display text-4xl md:text-5xl font-bold mb-6 leading-tight">
               Ready for the Adventure of a Lifetime?
             </h2>
-            <p className="text-2xl md:text-3xl mb-12 opacity-90 font-medium leading-relaxed">
+            <p className="text-lg md:text-xl mb-10 opacity-90 font-medium leading-relaxed">
               Don't wait for the weekend—magical memories are being made every single day at ElMalahy!
             </p>
             <Link href="/booking">
-              <Button size="lg" className="h-20 px-12 rounded-full bg-secondary text-secondary-foreground text-2xl font-black shadow-2xl hover:shadow-secondary/50 hover:scale-110 transition-all duration-500 group">
+              <Button size="lg" className="h-16 px-10 rounded-full bg-secondary text-secondary-foreground text-xl font-bold shadow-2xl hover:shadow-secondary/50 hover:scale-110 transition-all duration-500 group">
                 BOOK YOUR ADVENTURE NOW
-                <ArrowRight className="ml-4 w-8 h-8 group-hover:translate-x-2 transition-transform" />
+                <ArrowRight className="ml-4 w-6 h-6 group-hover:translate-x-2 transition-transform" />
               </Button>
             </Link>
           </motion.div>
