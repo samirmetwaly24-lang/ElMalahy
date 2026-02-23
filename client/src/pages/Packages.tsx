@@ -6,6 +6,8 @@ import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import { motion } from "framer-motion";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import decoShape1 from "@assets/image_1771633780637.png";
+import decoShape2 from "@assets/image_1771633791856.png";
 
 export default function Packages() {
   const { data: packages, isLoading } = usePackages();
@@ -17,7 +19,21 @@ export default function Packages() {
     <div className="min-h-screen bg-background">
       <Navigation />
       
-      <div className="container mx-auto px-4 py-16">
+      <div className="container mx-auto px-4 py-16 relative">
+        {/* Decorative Elements */}
+        <motion.img 
+          src={decoShape1}
+          animate={{ rotate: [0, 360] }}
+          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+          className="absolute top-20 left-0 w-24 h-24 opacity-10 hidden lg:block pointer-events-none"
+        />
+        <motion.img 
+          src={decoShape2}
+          animate={{ scale: [1, 1.1, 1] }}
+          transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute bottom-20 right-0 w-32 h-32 opacity-10 hidden lg:block pointer-events-none"
+        />
+
         <div className="text-center mb-16">
           <motion.h1 
             initial={{ opacity: 0, y: -20 }}

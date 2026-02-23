@@ -5,8 +5,10 @@ import { AttractionCard } from "@/components/AttractionCard";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
-import { Loader2, AlertCircle, Info } from "lucide-react";
+import { Loader2, AlertCircle, Info, Sparkles } from "lucide-react";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import decoShape2 from "@assets/image_1771633791856.png";
+import decoShape3 from "@assets/image_1771633799636.png";
 
 export default function Attractions() {
   const { data: attractions, isLoading } = useAttractions();
@@ -42,7 +44,21 @@ export default function Attractions() {
     <div className="min-h-screen bg-background">
       <Navigation />
       
-      <div className="container mx-auto px-4 py-16">
+      <div className="container mx-auto px-4 py-16 relative">
+        {/* Floating Decorative Assets */}
+        <motion.img 
+          src={decoShape2}
+          animate={{ y: [0, -15, 0], opacity: [0.1, 0.2, 0.1] }}
+          transition={{ duration: 4, repeat: Infinity }}
+          className="absolute top-40 right-10 w-24 h-24 pointer-events-none"
+        />
+        <motion.img 
+          src={decoShape3}
+          animate={{ x: [0, 15, 0], opacity: [0.05, 0.1, 0.05] }}
+          transition={{ duration: 5, repeat: Infinity }}
+          className="absolute bottom-80 left-10 w-48 h-48 pointer-events-none"
+        />
+
         <div className="text-center mb-16">
           <motion.h1 
             initial={{ opacity: 0, y: -20 }}

@@ -12,6 +12,9 @@ import koveImg from "@assets/WhatsApp_Image_2026-02-22_at_3.32.17_A_177172538646
 import filtrdImg from "@assets/WhatsApp_Image_2026-02-22_at_3.32.17_AM_1771725386468.jpeg";
 import generalRulesImg from "@assets/General_Rules_English_1771806156439.jpg";
 import disclaimerImg from "@assets/3-_90_cm_X_130_cm_1_copy_1771806156440.jpg";
+import decoShape1 from "@assets/image_1771633780637.png";
+import decoShape2 from "@assets/image_1771633791856.png";
+import decoShape3 from "@assets/image_1771633799636.png";
 
 export default function Home() {
   const topThrills = [
@@ -65,6 +68,20 @@ export default function Home() {
         </div>
 
         <div className="relative z-20 container mx-auto px-4 text-center">
+          {/* Floating Decorative Elements */}
+          <motion.img 
+            src={decoShape1}
+            animate={{ y: [0, -20, 0], rotate: [0, 5, 0] }}
+            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute -top-20 -left-10 w-32 h-32 opacity-20 hidden lg:block"
+          />
+          <motion.img 
+            src={decoShape2}
+            animate={{ y: [0, 20, 0], rotate: [0, -5, 0] }}
+            transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute bottom-40 -right-20 w-40 h-40 opacity-20 hidden lg:block"
+          />
+
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -93,7 +110,13 @@ export default function Home() {
       </section>
 
       {/* Top Thrill Section */}
-      <section className="py-24 relative overflow-hidden">
+      <section className="py-24 relative overflow-hidden bg-muted/5">
+        {/* Decorative background shape */}
+        <div className="absolute top-0 left-0 w-full h-full opacity-5 pointer-events-none overflow-hidden">
+          <img src={decoShape3} className="absolute -top-20 -left-20 w-96 h-96 rotate-12" />
+          <img src={decoShape3} className="absolute -bottom-20 -right-20 w-96 h-96 -rotate-12" />
+        </div>
+        
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="font-display text-4xl md:text-5xl font-bold text-primary mb-4">Top Thrills</h2>
