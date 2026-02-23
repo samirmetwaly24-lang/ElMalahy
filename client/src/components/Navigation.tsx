@@ -48,7 +48,7 @@ export function Navigation() {
           <img 
             src={elMalahyLogo} 
             alt="ElMalahy - The Land of Amusement" 
-            className="h-16 md:h-20 w-auto group-hover:scale-105 transition-transform duration-300" 
+            className="h-24 md:h-32 w-auto group-hover:scale-105 transition-transform duration-300" 
           />
         </Link>
 

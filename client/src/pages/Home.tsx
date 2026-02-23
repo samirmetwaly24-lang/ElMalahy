@@ -1,7 +1,7 @@
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
 import { motion } from "framer-motion";
-import { ArrowRight, Ticket, Star, CalendarDays } from "lucide-react";
+import { ArrowRight, Ticket, Star, CalendarDays, ShieldAlert, BookOpen } from "lucide-react";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { useAttractions } from "@/hooks/use-attractions";
@@ -10,6 +10,8 @@ import axisImg from "@assets/WhatsApp_Image_2026-02-22_at_3.32.4_1771725386466.j
 import tasweraImg from "@assets/WhatsApp_Image_2026-02-22_at_3.32.17__1771725386467.jpeg";
 import koveImg from "@assets/WhatsApp_Image_2026-02-22_at_3.32.17_A_1771725386468.jpeg";
 import filtrdImg from "@assets/WhatsApp_Image_2026-02-22_at_3.32.17_AM_1771725386468.jpeg";
+import generalRulesImg from "@assets/General_Rules_English_1771806156439.jpg";
+import disclaimerImg from "@assets/3-_90_cm_X_130_cm_1_copy_1771806156440.jpg";
 
 export default function Home() {
   const topThrills = [
@@ -193,6 +195,58 @@ export default function Home() {
               <h3 className="font-display text-2xl font-bold mb-4">Seasonal Passes</h3>
               <p className="text-muted-foreground">Unlimited fun all year round for one low price.</p>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Rules & Disclaimer Section */}
+      <section className="py-24 bg-muted/30">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="font-display text-4xl md:text-5xl font-bold text-primary mb-4">Safety & Guidelines</h2>
+            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+              Please review our general rules and disclaimer to ensure a safe and magical experience for everyone.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-6xl mx-auto">
+            <motion.div 
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="group"
+            >
+              <div className="mb-6 flex items-center gap-3">
+                <BookOpen className="w-8 h-8 text-primary" />
+                <h3 className="text-2xl font-display font-bold text-primary">General Rules</h3>
+              </div>
+              <div className="rounded-[2.5rem] overflow-hidden shadow-2xl border-4 border-white group-hover:scale-[1.02] transition-transform duration-500">
+                <img 
+                  src={generalRulesImg} 
+                  alt="General Rules" 
+                  className="w-full h-auto object-cover"
+                />
+              </div>
+            </motion.div>
+
+            <motion.div 
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="group"
+            >
+              <div className="mb-6 flex items-center gap-3">
+                <ShieldAlert className="w-8 h-8 text-secondary" />
+                <h3 className="text-2xl font-display font-bold text-secondary">Disclaimer</h3>
+              </div>
+              <div className="rounded-[2.5rem] overflow-hidden shadow-2xl border-4 border-white group-hover:scale-[1.02] transition-transform duration-500">
+                <img 
+                  src={disclaimerImg} 
+                  alt="Disclaimer" 
+                  className="w-full h-auto object-cover"
+                />
+              </div>
+            </motion.div>
           </div>
         </div>
       </section>
