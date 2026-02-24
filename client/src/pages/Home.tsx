@@ -17,6 +17,7 @@ import decoShape2 from "@assets/image_1771633791856.png";
 import decoShape3 from "@assets/image_1771633799636.png";
 import experienceImg1 from "@assets/WhatsApp_Image_2026-02-22_at_3.32.4_1771725386466.jpeg";
 import experienceImg2 from "@assets/WhatsApp_Image_2026-02-22_at_3.32.17__1771725386467.jpeg";
+import ctaBgImg from "@assets/WhatsApp_Image_2026-02-25_at_12.43.17_evoto_edited_1771976773718.jpg";
 
 export default function Home() {
   const topThrills = [
@@ -377,28 +378,31 @@ export default function Home() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-24 bg-gradient-to-r from-primary to-accent text-white relative overflow-hidden">
-        <div className="absolute inset-0 opacity-20">
-          <div className="absolute top-0 left-0 w-64 h-64 bg-white rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
-          <div className="absolute bottom-0 right-0 w-96 h-96 bg-secondary rounded-full blur-3xl translate-x-1/2 translate-y-1/2" />
-        </div>
-        <div className="container mx-auto px-4 relative z-10 text-center">
+      <section className="py-32 md:py-48 relative overflow-hidden">
+        <div 
+          className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat transition-transform duration-700 hover:scale-105"
+          style={{ backgroundImage: `url(${ctaBgImg})` }}
+        />
+        <div className="absolute inset-0 bg-black/50 backdrop-blur-[2px] z-10" />
+        <div className="absolute inset-0 bg-gradient-to-r from-primary/60 to-accent/40 z-20" />
+        
+        <div className="container mx-auto px-4 relative z-30 text-center">
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             className="max-w-4xl mx-auto"
           >
-            <h2 className="font-display text-4xl md:text-5xl font-bold mb-6 leading-tight">
+            <h2 className="font-display text-4xl md:text-6xl font-bold mb-8 leading-tight text-white drop-shadow-2xl">
               Ready for the Adventure of a Lifetime?
             </h2>
-            <p className="text-lg md:text-xl mb-10 opacity-90 font-medium leading-relaxed">
+            <p className="text-xl md:text-2xl mb-12 opacity-95 font-medium leading-relaxed text-white drop-shadow-lg">
               Don't wait for the weekend—magical memories are being made every single day at ElMalahy!
             </p>
             <Link href="/booking">
-              <Button size="lg" className="h-16 px-10 rounded-full bg-secondary text-secondary-foreground text-xl font-bold shadow-2xl hover:shadow-secondary/50 hover:scale-110 transition-all duration-500 group">
+              <Button size="lg" className="h-20 px-12 rounded-full bg-secondary text-secondary-foreground text-2xl font-bold shadow-2xl hover:shadow-secondary/50 hover:scale-110 transition-all duration-500 group">
                 BOOK YOUR ADVENTURE NOW
-                <ArrowRight className="ml-4 w-6 h-6 group-hover:translate-x-2 transition-transform" />
+                <ArrowRight className="ml-4 w-8 h-8 group-hover:translate-x-2 transition-transform" />
               </Button>
             </Link>
           </motion.div>
