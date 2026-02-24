@@ -15,6 +15,8 @@ import disclaimerImg from "@assets/3-_90_cm_X_130_cm_1_copy_1771806156440.jpg";
 import decoShape1 from "@assets/image_1771633780637.png";
 import decoShape2 from "@assets/image_1771633791856.png";
 import decoShape3 from "@assets/image_1771633799636.png";
+import experienceImg1 from "@assets/WhatsApp_Image_2026-02-22_at_3.32.4_1771725386466.jpeg";
+import experienceImg2 from "@assets/WhatsApp_Image_2026-02-22_at_3.32.17__1771725386467.jpeg";
 
 export default function Home() {
   const topThrills = [
@@ -217,6 +219,106 @@ export default function Home() {
               </div>
               <h3 className="font-display text-2xl font-bold mb-4">Seasonal Passes</h3>
               <p className="text-muted-foreground">Unlimited fun all year round for one low price.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Discover Section (Reference Replication) */}
+      <section className="py-24 bg-background relative overflow-hidden">
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="flex flex-col lg:flex-row items-center gap-16">
+            {/* Left Side: Content */}
+            <div className="flex-1 text-left">
+              <motion.span 
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                className="text-secondary font-display font-bold uppercase tracking-widest text-sm mb-4 block"
+              >
+                Experience The Magic
+              </motion.span>
+              <motion.h2 
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.1 }}
+                className="font-display text-4xl md:text-6xl font-bold text-primary mb-6 leading-tight"
+              >
+                Discover Unlimited <br /> Fun At ElMalahy
+              </motion.h2>
+              <motion.p 
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.2 }}
+                className="text-muted-foreground text-lg mb-10 leading-relaxed max-w-xl"
+              >
+                Whether you're looking for heart-pounding thrill rides, magical family moments, or immersive themed adventures, we create unforgettable experiences that exceed your expectations. Every corner of our park is designed to bring joy and wonder to visitors of all ages.
+              </motion.p>
+
+              <div className="space-y-8">
+                <motion.div 
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.3 }}
+                  className="flex items-start gap-4"
+                >
+                  <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center text-primary shrink-0">
+                    <Star className="w-6 h-6" />
+                  </div>
+                  <div>
+                    <h4 className="text-xl font-display font-bold text-primary mb-1">Top Thrill Attractions</h4>
+                    <p className="text-muted-foreground">Are you ready to step out of your comfort zone? Let us guide you to heart-pounding heights and unforgettable journeys.</p>
+                  </div>
+                </motion.div>
+
+                <motion.div 
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.4 }}
+                  className="flex items-start gap-4"
+                >
+                  <div className="w-12 h-12 rounded-2xl bg-secondary/10 flex items-center justify-center text-secondary shrink-0">
+                    <ShieldAlert className="w-6 h-6" />
+                  </div>
+                  <div>
+                    <h4 className="text-xl font-display font-bold text-secondary mb-1">Safe & Family Friendly</h4>
+                    <p className="text-muted-foreground">We ensure every part of your visit runs smoothly—from arrival to departure, with the highest safety standards for total peace of mind.</p>
+                  </div>
+                </motion.div>
+              </div>
+            </div>
+
+            {/* Right Side: Overlapping Images */}
+            <div className="flex-1 relative w-full max-w-xl aspect-[4/3] lg:aspect-auto h-[500px]">
+              <motion.div 
+                initial={{ opacity: 0, scale: 0.8, rotate: -5 }}
+                whileInView={{ opacity: 1, scale: 1, rotate: -3 }}
+                animate={{ y: [0, -10, 0] }}
+                transition={{ 
+                  opacity: { duration: 0.8 },
+                  scale: { duration: 0.8 },
+                  y: { duration: 4, repeat: Infinity, ease: "easeInOut" }
+                }}
+                className="absolute right-0 top-0 w-3/4 h-3/4 rounded-[2.5rem] overflow-hidden shadow-2xl border-8 border-white z-20"
+              >
+                <img src={experienceImg1} alt="Thrill Ride" className="w-full h-full object-cover" />
+              </motion.div>
+              
+              <motion.div 
+                initial={{ opacity: 0, scale: 0.8, rotate: 5 }}
+                whileInView={{ opacity: 1, scale: 1, rotate: 6 }}
+                animate={{ y: [0, 10, 0] }}
+                transition={{ 
+                  opacity: { duration: 0.8, delay: 0.2 },
+                  scale: { duration: 0.8, delay: 0.2 },
+                  y: { duration: 5, repeat: Infinity, ease: "easeInOut" }
+                }}
+                className="absolute left-0 bottom-0 w-2/3 h-2/3 rounded-[2.5rem] overflow-hidden shadow-xl border-8 border-white z-10"
+              >
+                <img src={experienceImg2} alt="Family Fun" className="w-full h-full object-cover" />
+              </motion.div>
+
+              {/* Decorative Accent */}
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-secondary/5 rounded-full blur-3xl -z-10" />
             </div>
           </div>
         </div>
