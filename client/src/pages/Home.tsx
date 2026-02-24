@@ -378,7 +378,7 @@ export default function Home() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-32 md:py-48 relative overflow-hidden">
+      <section className="py-16 md:py-48 relative overflow-hidden">
         <div 
           className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat transition-transform duration-700 hover:scale-105"
           style={{ backgroundImage: `url(${ctaBgImg})` }}
@@ -393,16 +393,16 @@ export default function Home() {
             viewport={{ once: true }}
             className="max-w-4xl mx-auto"
           >
-            <h2 className="font-display text-4xl md:text-6xl font-bold mb-8 leading-tight text-white drop-shadow-2xl">
+            <h2 className="font-display text-3xl md:text-6xl font-bold mb-4 md:mb-8 leading-tight text-white drop-shadow-2xl">
               Ready for the Adventure of a Lifetime?
             </h2>
-            <p className="text-xl md:text-2xl mb-12 opacity-95 font-medium leading-relaxed text-white drop-shadow-lg">
+            <p className="text-base md:text-2xl mb-8 md:mb-12 opacity-95 font-medium leading-relaxed text-white drop-shadow-lg">
               Don't wait for the weekend—magical memories are being made every single day at ElMalahy!
             </p>
             <Link href="/booking">
-              <Button size="lg" className="h-20 px-12 rounded-full bg-secondary text-secondary-foreground text-2xl font-bold shadow-2xl hover:shadow-secondary/50 hover:scale-110 transition-all duration-500 group">
+              <Button size="lg" className="h-12 md:h-18 px-6 md:px-12 rounded-full bg-secondary text-secondary-foreground text-base md:text-xl font-bold shadow-2xl hover:shadow-secondary/50 hover:scale-110 transition-all duration-500 group">
                 BOOK YOUR ADVENTURE NOW
-                <ArrowRight className="ml-4 w-8 h-8 group-hover:translate-x-2 transition-transform" />
+                <ArrowRight className="ml-3 md:ml-4 w-5 h-5 md:w-7 h-7 group-hover:translate-x-2 transition-transform" />
               </Button>
             </Link>
           </motion.div>
