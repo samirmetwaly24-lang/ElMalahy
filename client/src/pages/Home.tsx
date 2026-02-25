@@ -19,6 +19,15 @@ import experienceImg1 from "@assets/WhatsApp_Image_2026-02-22_at_3.32.4_17717253
 import experienceImg2 from "@assets/WhatsApp_Image_2026-02-22_at_3.32.17__1771725386467.jpeg";
 import ctaBgImg from "@assets/WhatsApp_Image_2026-02-25_at_12.43.17_evoto_edited_1771976773718.jpg";
 
+// Preload critical assets
+if (typeof window !== 'undefined') {
+  const preloadImages = [generalRulesImg, disclaimerImg, ctaBgImg];
+  preloadImages.forEach(src => {
+    const img = new Image();
+    img.src = src;
+  });
+}
+
 export default function Home() {
   const topThrills = [
     {
@@ -325,72 +334,97 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Rules & Disclaimer Section */}
+      {/* Safety & Guidelines Section */}
       <section className="py-24 bg-muted/30">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-16"
+          >
             <h2 className="font-display text-4xl md:text-5xl font-bold text-primary mb-4">Safety & Guidelines</h2>
             <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
               Please review our general rules and disclaimer to ensure a safe and magical experience for everyone.
             </p>
-          </div>
+          </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-6xl mx-auto">
             <motion.div 
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
               className="group"
             >
               <div className="mb-6 flex items-center gap-3">
                 <BookOpen className="w-8 h-8 text-primary" />
                 <h3 className="text-2xl font-display font-bold text-primary">General Rules</h3>
               </div>
-              <div className="rounded-[2.5rem] overflow-hidden shadow-2xl border-4 border-white group-hover:scale-[1.02] transition-transform duration-500">
+              <motion.div 
+                animate={{ y: [0, -10, 0] }}
+                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                className="rounded-[2.5rem] overflow-hidden shadow-2xl border-4 border-white group-hover:scale-[1.02] transition-transform duration-500"
+              >
                 <img 
                   src={generalRulesImg} 
                   alt="General Rules" 
                   className="w-full h-auto object-cover"
+                  loading="eager"
                 />
-              </div>
+              </motion.div>
             </motion.div>
 
             <motion.div 
               initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
               className="group"
             >
               <div className="mb-6 flex items-center gap-3">
                 <ShieldAlert className="w-8 h-8 text-secondary" />
                 <h3 className="text-2xl font-display font-bold text-secondary">Disclaimer</h3>
               </div>
-              <div className="rounded-[2.5rem] overflow-hidden shadow-2xl border-4 border-white group-hover:scale-[1.02] transition-transform duration-500">
+              <motion.div 
+                animate={{ y: [0, 10, 0] }}
+                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+                className="rounded-[2.5rem] overflow-hidden shadow-2xl border-4 border-white group-hover:scale-[1.02] transition-transform duration-500"
+              >
                 <img 
                   src={disclaimerImg} 
                   alt="Disclaimer" 
                   className="w-full h-auto object-cover"
+                  loading="eager"
                 />
-              </div>
+              </motion.div>
             </motion.div>
           </div>
         </div>
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 md:py-48 relative overflow-hidden">
+      <motion.section 
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.8 }}
+        className="py-16 md:py-48 relative overflow-hidden"
+      >
         <div 
           className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat transition-transform duration-700 hover:scale-105"
           style={{ backgroundImage: `url(${ctaBgImg})` }}
         />
-        <div className="absolute inset-0 bg-black/50 backdrop-blur-[2px] z-10" />
-        <div className="absolute inset-0 bg-gradient-to-r from-primary/60 to-accent/40 z-20" />
+        <div className="absolute inset-0 bg-black/20 backdrop-blur-[0.5px] z-10" />
+        <div className="absolute inset-0 bg-gradient-to-r from-primary/30 to-accent/10 z-20" />
         
         <div className="container mx-auto px-4 relative z-30 text-center">
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
+            initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
             className="max-w-4xl mx-auto"
           >
             <h2 className="font-display text-3xl md:text-6xl font-bold mb-4 md:mb-8 leading-tight text-white drop-shadow-2xl">
@@ -407,7 +441,7 @@ export default function Home() {
             </Link>
           </motion.div>
         </div>
-      </section>
+      </motion.section>
 
       <Footer />
     </div>

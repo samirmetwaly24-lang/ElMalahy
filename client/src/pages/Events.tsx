@@ -5,9 +5,32 @@ import { CalendarDays, MapPin, Clock, Loader2 } from "lucide-react";
 import { format } from "date-fns";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
+import tamerAshourImg from "@assets/540694420_665898036534502_6760838696307469375_n_1772062674044.jpg";
+import ramySabryImg from "@assets/8a4ac2a7-9d5c-458d-99fc-c08f2e882054_1772062683522.jpg";
 
 export default function Events() {
   const { data: events, isLoading } = useEvents();
+
+  const staticEvents = [
+    {
+      id: 'static-1',
+      title: "Tamer Ashour Live",
+      description: "Experience an unforgettable night with the sensation Tamer Ashour at EL ARENA. Don't miss the magic!",
+      date: new Date("2025-09-26T21:00:00"),
+      image: tamerAshourImg,
+      location: "EL ARENA"
+    },
+    {
+      id: 'static-2',
+      title: "Ramy Sabry Live",
+      description: "Join the Arab Icon Ramy Sabry for a spectacular performance at EL ARENA. A night of pure musical bliss.",
+      date: new Date("2025-11-21T21:00:00"),
+      image: ramySabryImg,
+      location: "EL ARENA"
+    }
+  ];
+
+  const allEvents = [...(events || []), ...staticEvents];
 
   return (
     <div className="min-h-screen bg-background">
@@ -33,7 +56,7 @@ export default function Events() {
           </div>
         ) : (
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
-            {events?.map((event, index) => (
+            {allEvents.map((event, index) => (
               <motion.div
                 key={event.id}
                 initial={{ opacity: 0, x: index % 2 === 0 ? -30 : 30 }}
@@ -68,7 +91,7 @@ export default function Events() {
                     </div>
                     <div className="flex items-center gap-2">
                       <MapPin className="w-4 h-4 text-accent" />
-                      <span>Main Plaza Stage</span>
+                      <span>{event.location || "Main Plaza Stage"}</span>
                     </div>
                   </div>
                   
@@ -81,7 +104,7 @@ export default function Events() {
               </motion.div>
             ))}
 
-            {events?.length === 0 && (
+            {allEvents.length === 0 && (
               <div className="col-span-full text-center py-20 bg-muted/20 rounded-3xl">
                 <CalendarDays className="w-16 h-16 text-muted-foreground mx-auto mb-4 opacity-50" />
                 <h3 className="text-2xl font-display font-bold text-muted-foreground">No upcoming events scheduled</h3>
