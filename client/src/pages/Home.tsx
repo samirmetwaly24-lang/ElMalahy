@@ -335,13 +335,13 @@ export default function Home() {
       </section>
 
       {/* Safety & Guidelines Section */}
-      <section className="py-24 bg-muted/30">
+      <section className="py-24 bg-muted/30 overflow-hidden">
         <div className="container mx-auto px-4">
           <motion.div 
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.6 }}
+            viewport={{ once: true, amount: 0.1 }}
+            transition={{ duration: 0.4, ease: "easeOut" }}
             className="text-center mb-16"
           >
             <h2 className="font-display text-4xl md:text-5xl font-bold text-primary mb-4">Safety & Guidelines</h2>
@@ -352,51 +352,55 @@ export default function Home() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-6xl mx-auto">
             <motion.div 
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.8, ease: "easeOut" }}
-              className="group"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.1 }}
+              transition={{ duration: 0.5, ease: "easeOut" }}
+              className="group will-change-transform"
             >
               <div className="mb-6 flex items-center gap-3">
                 <BookOpen className="w-8 h-8 text-primary" />
                 <h3 className="text-2xl font-display font-bold text-primary">General Rules</h3>
               </div>
               <motion.div 
-                animate={{ y: [0, -10, 0] }}
-                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                className="rounded-[2.5rem] overflow-hidden shadow-2xl border-4 border-white group-hover:scale-[1.02] transition-transform duration-500"
+                animate={{ y: [0, -8, 0] }}
+                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+                className="rounded-[2.5rem] overflow-hidden shadow-2xl border-4 border-white group-hover:scale-[1.01] transition-transform duration-500 bg-muted"
+                style={{ aspectRatio: '90/130', willChange: 'transform' }}
               >
                 <img 
                   src={generalRulesImg} 
                   alt="General Rules" 
-                  className="w-full h-auto object-cover"
+                  className="w-full h-full object-cover"
                   loading="eager"
+                  decoding="async"
                 />
               </motion.div>
             </motion.div>
 
             <motion.div 
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.8, ease: "easeOut" }}
-              className="group"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.1 }}
+              transition={{ duration: 0.5, delay: 0.1, ease: "easeOut" }}
+              className="group will-change-transform"
             >
               <div className="mb-6 flex items-center gap-3">
                 <ShieldAlert className="w-8 h-8 text-secondary" />
                 <h3 className="text-2xl font-display font-bold text-secondary">Disclaimer</h3>
               </div>
               <motion.div 
-                animate={{ y: [0, 10, 0] }}
-                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-                className="rounded-[2.5rem] overflow-hidden shadow-2xl border-4 border-white group-hover:scale-[1.02] transition-transform duration-500"
+                animate={{ y: [0, 8, 0] }}
+                transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+                className="rounded-[2.5rem] overflow-hidden shadow-2xl border-4 border-white group-hover:scale-[1.01] transition-transform duration-500 bg-muted"
+                style={{ aspectRatio: '90/130', willChange: 'transform' }}
               >
                 <img 
                   src={disclaimerImg} 
                   alt="Disclaimer" 
-                  className="w-full h-auto object-cover"
+                  className="w-full h-full object-cover"
                   loading="eager"
+                  decoding="async"
                 />
               </motion.div>
             </motion.div>
@@ -406,11 +410,11 @@ export default function Home() {
 
       {/* CTA Section */}
       <motion.section 
-        initial={{ opacity: 0, y: 30 }}
+        initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-100px" }}
-        transition={{ duration: 0.8 }}
-        className="py-16 md:py-48 relative overflow-hidden"
+        viewport={{ once: true, amount: 0.1 }}
+        transition={{ duration: 0.5, ease: "easeOut" }}
+        className="py-16 md:py-48 relative overflow-hidden will-change-transform"
       >
         <div 
           className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat transition-transform duration-700 hover:scale-105"
@@ -421,10 +425,10 @@ export default function Home() {
         
         <div className="container mx-auto px-4 relative z-30 text-center">
           <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
+            initial={{ opacity: 0, scale: 0.98 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.4, ease: "easeOut" }}
             className="max-w-4xl mx-auto"
           >
             <h2 className="font-display text-3xl md:text-6xl font-bold mb-4 md:mb-8 leading-tight text-white drop-shadow-2xl">

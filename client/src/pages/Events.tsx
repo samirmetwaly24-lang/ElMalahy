@@ -8,6 +8,14 @@ import { Button } from "@/components/ui/button";
 import tamerAshourImg from "@assets/540694420_665898036534502_6760838696307469375_n_1772062674044.jpg";
 import ramySabryImg from "@assets/8a4ac2a7-9d5c-458d-99fc-c08f2e882054_1772062683522.jpg";
 
+// Preload artist images
+if (typeof window !== 'undefined') {
+  [tamerAshourImg, ramySabryImg].forEach(src => {
+    const img = new Image();
+    img.src = src;
+  });
+}
+
 export default function Events() {
   const { data: events, isLoading } = useEvents();
 
@@ -30,7 +38,9 @@ export default function Events() {
     }
   ];
 
-  const allEvents = [...(events || []), ...staticEvents];
+  const allEvents = [...(events || []), ...staticEvents].filter(e => 
+    e.title !== "Summer Splash Festival" && e.title !== "Spooky Nights"
+  );
 
   return (
     <div className="min-h-screen bg-background">
@@ -59,16 +69,19 @@ export default function Events() {
             {allEvents.map((event, index) => (
               <motion.div
                 key={event.id}
-                initial={{ opacity: 0, x: index % 2 === 0 ? -30 : 30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                className="group flex flex-col md:flex-row bg-card rounded-3xl overflow-hidden shadow-lg hover:shadow-xl transition-all border border-border/50 h-full"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.1 }}
+                transition={{ duration: 0.4, delay: Math.min(index * 0.1, 0.3) }}
+                className="group flex flex-col md:flex-row bg-card rounded-3xl overflow-hidden shadow-lg hover:shadow-xl transition-all border border-border/50 h-full will-change-transform"
               >
-                <div className="w-full md:w-2/5 h-64 md:h-auto overflow-hidden">
+                <div className="w-full md:w-2/5 h-64 md:h-auto overflow-hidden bg-muted">
                   <img 
                     src={event.image} 
                     alt={event.title} 
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    loading={index < 2 ? "eager" : "lazy"}
+                    decoding="async"
                   />
                   <div className="md:hidden absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-4 py-2 rounded-xl font-bold text-primary shadow-sm">
                     {format(new Date(event.date), "MMM d")}
