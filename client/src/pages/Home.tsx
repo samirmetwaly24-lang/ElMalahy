@@ -370,7 +370,7 @@ export default function Home() {
                 <img 
                   src={generalRulesImg} 
                   alt="General Rules" 
-                  className="w-full h-full object-contain p-4"
+                  className="w-full h-full object-contain p-4 rounded-[2.5rem]"
                   loading="eager"
                   decoding="async"
                 />
@@ -396,7 +396,7 @@ export default function Home() {
                 <img 
                   src={disclaimerImg} 
                   alt="Disclaimer" 
-                  className="w-full h-full object-contain p-4"
+                  className="w-full h-full object-contain p-4 rounded-[2.5rem]"
                   loading="eager"
                   decoding="async"
                 />
