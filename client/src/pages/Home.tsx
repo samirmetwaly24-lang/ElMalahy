@@ -352,26 +352,25 @@ export default function Home() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-6xl mx-auto">
             <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.1 }}
-              transition={{ duration: 0.5, ease: "easeOut" }}
-              className="group will-change-transform"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.4 }}
+              className="group"
             >
               <div className="mb-6 flex items-center gap-3">
                 <BookOpen className="w-8 h-8 text-primary" />
                 <h3 className="text-2xl font-display font-bold text-primary">General Rules</h3>
               </div>
               <motion.div 
-                animate={{ y: [0, -8, 0] }}
-                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-                className="rounded-[2.5rem] overflow-hidden shadow-2xl border-4 border-white group-hover:scale-[1.01] transition-transform duration-500 bg-muted"
-                style={{ aspectRatio: '90/130', willChange: 'transform' }}
+                animate={{ y: [0, -5, 0] }}
+                transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+                className="rounded-[2.5rem] overflow-hidden shadow-2xl border-4 border-white group-hover:scale-[1.01] transition-transform duration-500 bg-muted flex items-center justify-center min-h-[400px] md:min-h-[500px]"
               >
                 <img 
                   src={generalRulesImg} 
                   alt="General Rules" 
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-contain p-4"
                   loading="eager"
                   decoding="async"
                 />
@@ -379,26 +378,25 @@ export default function Home() {
             </motion.div>
 
             <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.1 }}
-              transition={{ duration: 0.5, delay: 0.1, ease: "easeOut" }}
-              className="group will-change-transform"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.4, delay: 0.1 }}
+              className="group"
             >
               <div className="mb-6 flex items-center gap-3">
                 <ShieldAlert className="w-8 h-8 text-secondary" />
                 <h3 className="text-2xl font-display font-bold text-secondary">Disclaimer</h3>
               </div>
               <motion.div 
-                animate={{ y: [0, 8, 0] }}
-                transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-                className="rounded-[2.5rem] overflow-hidden shadow-2xl border-4 border-white group-hover:scale-[1.01] transition-transform duration-500 bg-muted"
-                style={{ aspectRatio: '90/130', willChange: 'transform' }}
+                animate={{ y: [0, 5, 0] }}
+                transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
+                className="rounded-[2.5rem] overflow-hidden shadow-2xl border-4 border-white group-hover:scale-[1.01] transition-transform duration-500 bg-muted flex items-center justify-center min-h-[400px] md:min-h-[500px]"
               >
                 <img 
                   src={disclaimerImg} 
                   alt="Disclaimer" 
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-contain p-4"
                   loading="eager"
                   decoding="async"
                 />
