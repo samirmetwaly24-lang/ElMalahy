@@ -13,17 +13,15 @@ export function FloatingControlButton() {
         aria-label="Open control panel"
         data-testid="button-control-panel"
       >
-        {/* Glow effect */}
-        <div className="absolute inset-0 rounded-full bg-gradient-to-br from-primary/30 to-secondary/30 blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-        
-        {/* Button background */}
-        <div className="absolute inset-0 rounded-full bg-white dark:bg-slate-900 shadow-lg dark:shadow-2xl group-hover:shadow-2xl dark:group-hover:shadow-primary/50 transition-all duration-300" />
-        
-        {/* Icon */}
+        {/* Soft glow on hover only — no background shape */}
+        <div className="absolute inset-0 rounded-full bg-gradient-to-br from-primary/20 to-secondary/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+
+        {/* Standalone icon */}
         <img
           src={controlButtonImg}
           alt="Control panel"
-          className="w-10 h-10 md:w-12 md:h-12 relative z-10"
+          className="w-12 h-12 md:w-14 md:h-14 relative z-10 drop-shadow-lg group-hover:drop-shadow-[0_0_12px_rgba(139,92,246,0.6)] transition-all duration-300"
+          style={{ willChange: 'transform, filter' }}
         />
       </button>
 
