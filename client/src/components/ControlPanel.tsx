@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useTheme } from '@/hooks/useTheme';
-import { Moon, Sun, Settings } from 'lucide-react';
+import { Sun, Settings } from 'lucide-react';
+import darkModeIcon from '@assets/version_2_1773356286554.png';
 
 interface ControlPanelProps {
   isOpen: boolean;
@@ -24,10 +25,10 @@ export function ControlPanel({ isOpen, onClose }: ControlPanelProps) {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, [isOpen, onClose]);
 
-  const themeOptions = [
-    { value: 'light' as const, label: 'Light', icon: Sun },
-    { value: 'dark' as const, label: 'Dark', icon: Moon },
-    { value: 'auto' as const, label: 'Auto', icon: Settings },
+  const themeOptions: Array<{ value: 'light' | 'dark' | 'auto'; label: string; icon?: typeof Sun; customImg?: string }> = [
+    { value: 'light', label: 'Light', icon: Sun },
+    { value: 'dark', label: 'Dark', customImg: darkModeIcon },
+    { value: 'auto', label: 'Auto', icon: Settings },
   ];
 
   return (
@@ -68,20 +69,27 @@ export function ControlPanel({ isOpen, onClose }: ControlPanelProps) {
               Theme
             </p>
             <div className="space-y-2">
-              {themeOptions.map(({ value, label, icon: Icon }) => (
+              {themeOptions.map(({ value, label, icon: Icon, customImg }) => (
                 <button
                   key={value}
-                  onClick={() => {
-                    setTheme(value);
-                  }}
-                  className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-200 ${
+                  onClick={() => setTheme(value)}
+                  className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-200 group ${
                     theme === value
                       ? 'bg-primary text-white dark:bg-primary dark:text-white shadow-lg'
                       : 'bg-muted/50 dark:bg-slate-700/50 text-foreground dark:text-slate-300 hover:bg-muted dark:hover:bg-slate-700'
                   }`}
                   data-testid={`button-theme-${value}`}
                 >
-                  <Icon className="w-4 h-4" />
+                  {customImg ? (
+                    <img
+                      src={customImg}
+                      alt={label}
+                      className="w-6 h-6 md:w-6 md:h-6 object-contain flex-shrink-0 transition-all duration-250 ease-out group-hover:scale-125 group-hover:brightness-110 group-hover:drop-shadow-[0_0_6px_rgba(139,92,246,0.7)]"
+                      style={{ willChange: 'transform, filter' }}
+                    />
+                  ) : Icon ? (
+                    <Icon className="w-4 h-4 flex-shrink-0" />
+                  ) : null}
                   <span className="font-medium text-sm">{label}</span>
                 </button>
               ))}
