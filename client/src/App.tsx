@@ -5,6 +5,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { ThemeProvider } from "@/context/ThemeContext";
 import { FloatingControlButton } from "@/components/FloatingControlButton";
+import { StarField } from "@/components/StarField";
 import NotFound from "@/pages/not-found";
 
 // Import pages
@@ -32,6 +33,7 @@ function Router() {
   return (
     <>
       <ScrollToTop />
+      <StarField />
       <FloatingControlButton />
       <Switch>
         <Route path="/" component={Home} />
