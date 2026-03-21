@@ -53,7 +53,7 @@ export function Navigation() {
           {/* Logo — switches between purple and white version */}
           <Link href="/" className="flex items-center gap-2 group">
             <img
-              src={isDark ? elMalahyWhiteLogo : elMalahyLogo}
+              src={isDark ? elMalahyLogo : elMalahyWhiteLogo}
               alt="ElMalahy - The Land of Amusement"
               className="h-24 md:h-32 w-auto transition-all duration-300 group-hover:scale-105"
               style={{ filter: isDark ? 'invert(0)' : 'none' }}
