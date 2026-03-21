@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useTheme } from '@/hooks/useTheme';
 import { Sun, Settings } from 'lucide-react';
-import darkModeIcon from '@assets/version_2_1773356507404.png';
+import darkModeIcon from '@assets/version_2_1774093684092.png';
 
 interface ControlPanelProps {
   isOpen: boolean;
