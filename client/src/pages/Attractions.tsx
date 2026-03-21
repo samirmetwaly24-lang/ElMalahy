@@ -8,6 +8,7 @@ import { motion } from "framer-motion";
 import { Loader2, AlertCircle, Info, Sparkles } from "lucide-react";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import decoShape2 from "@assets/image_1771633791856.png";
+import ridesHeaderImg from "@assets/2-_90_cm_X_130_cm_1_copy_1774099402724.png";
 import decoShape3 from "@assets/image_1771633799636.png";
 
 export default function Attractions() {
@@ -60,13 +61,17 @@ export default function Attractions() {
         />
 
         <div className="text-center mb-16">
-          <motion.h1 
+          <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="font-display text-5xl md:text-7xl font-bold text-primary mb-6"
+            className="flex justify-center mb-6"
           >
-            Rides & Games
-          </motion.h1>
+            <img
+              src={ridesHeaderImg}
+              alt="Rides & Games — A World of Joy"
+              className="w-72 md:w-96 lg:w-[480px] h-auto object-contain drop-shadow-xl"
+            />
+          </motion.div>
           <div className="flex flex-wrap justify-center gap-3 mb-12">
             {[
               { id: 'all', label: 'All Fun' },
